@@ -3,10 +3,10 @@ import numpy as np
 
 class Problem:
     def __init__(self):
-        infile = open("point20.txt", "r")
+        infile = open("NewText.txt", "r")
         data = infile.read().split()
         data = [eval(x) for x in data]
-        self.city_count = data[0]  # 도시가 5개라면 도시 번호는 [0, 1, 2, 3, 4]
+        self.city_count = data[] 
         data.pop(0)
         self.pos_x = []
         self.pos_y = []
@@ -126,36 +126,3 @@ def main():
 #main()
 
 # GUI
-import tkinter as tk
-import threading
-
-def InitMap():
-    for i in range(tsp.city_count):
-        x, y = tsp.pos_x[i], tsp.pos_y[i]
-        canvas.create_oval(x - 3, y - 3, x + 3, y + 3, fill="black")
-        canvas.create_text(x, y - 10, text=str(i))
-
-def DrawTour(tour):
-    canvas.delete(tk.ALL)
-    InitMap()
-
-    for i in range(len(tour) - 1):
-        x1, y1 = tsp.pos_x[tour[i]], tsp.pos_y[tour[i]]
-        x2, y2 = tsp.pos_x[tour[i + 1]], tsp.pos_y[tour[i + 1]]
-        canvas.create_line(x1, y1, x2, y2)
-    x1, y1 = tsp.pos_x[tour[-1]], tsp.pos_y[tour[-1]]
-    x2, y2 = tsp.pos_x[tour[0]], tsp.pos_y[tour[0]]
-    canvas.create_line(x1, y1, x2, y2)
-
-    window.update()
-
-window = tk.Tk()
-window.title("TSP")
-canvas = tk.Canvas(window, width=600, height=600, bg="white")
-canvas.pack(padx=3, pady=3)
-btn_run = tk.Button(window, text="시작", width=40, height=2,
-                    command=lambda: threading.Thread(target=main).start())
-btn_run.pack(fill=tk.X, padx=3, pady=3)
-#InitMap()
-DrawTour([i for i in range(tsp.city_count)])
-window.mainloop()
